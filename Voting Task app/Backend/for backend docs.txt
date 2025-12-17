@@ -1,0 +1,81 @@
+for backend :
+
+for appln run : dotnet run 
+======================
+Swagger / API Endpoints
+
+Base URL: https://localhost:5001/api
+
+1. Get All Candidates
+GET /candidates
+Response:
+[
+  { "id": 1, "name": "Alice", "voteCount": 3 },
+  { "id": 2, "name": "Bob", "voteCount": 5 }
+]
+============================
+2. Add Candidate
+POST /candidates
+Body (JSON):
+{
+  "name": "Charlie"
+}
+Response:
+{
+  "id": 3,
+  "name": "Charlie",
+  "voteCount": 0
+}
+================================
+3. Get All Voters
+GET /voters
+Response:
+[
+  { "id": 1, "name": "John", "hasVoted": false },
+  { "id": 2, "name": "Jane", "hasVoted": true }
+]
+================================
+4. Add Voter
+POST /voters
+Body (JSON):
+{
+  "name": "Mark"
+}
+Response:
+{
+  "id": 3,
+  "name": "Mark",
+  "hasVoted": false
+}
+================================
+5. Cast Vote
+POST /votes
+Body (JSON):
+{
+  "voterId": 1,
+  "candidateId": 2
+}
+Response:
+{
+  "message": "Vote cast successfully"
+}
+================================
+After this:
+Candidate’s voteCount is incremented
+Voter’s hasVoted is set to true
+Quick Steps to Demo in Swagger
+================================
+Run backend:
+dotnet run
+================================
+Open Swagger UI:
+https://localhost:5001/swagger
+================================
+Test APIs:
+GET Candidates → show current votes
+GET Voters → show voter status
+POST Candidate/Voter → add new
+POST Vote → cast vote → show updated candidate vote & voter status
+================================
+✅ Tip for demo:
+Always GET Candidates & Voters first → cast vote → GET again to show live update.
